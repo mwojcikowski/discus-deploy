@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.3//EN"
+"/usr/share/xml/docbook/schema/dtd/4.3/docbookx.dtd">
+-->
+<chapter id="credits">
+  <title>Credits and License</title>
+
+  <sect1 id="contributions">
+    <title>Contributions</title>
+
+    <para>This section lists the developers and contributors to Mychem.</para>
+
+    <sect2 id="developers">
+      <title>Developers</title>
+
+      <para>These are developers that are involved in Mychem:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Jérôme Pansanel <email>jerome.pansanel@iphc.cnrs.fr</email></para>
+
+          <para>Project founder and developer</para>
+        </listitem>
+
+        <listitem>
+          <para>Aurélie De Luca <email>aureliedeluca@gmail.com</email></para>
+
+          <para>Developer</para>
+        </listitem>
+
+        <listitem>
+          <para>Bjoern Gruening <email>bjoern@gruenings.eu</email></para>
+
+          <para>Developer and tester</para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+
+    <sect2 id="contributors">
+      <title>Contributors</title>
+
+      <para>Contributors to Mychem are listed here:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ernst-Georg Schmid - Pgchem lead developer</para>
+
+          <para><ulink
+          url="http://pgfoundry.org/projects/pgchem/">Pgchem</ulink> is a
+          chemoinformatics extension for PostgreSQL developed by Ernst-Georg
+          Schmid. We have decided that Mychem Project should have the same
+          functions as Pgchem. Of course, we are sharing our knowledge on Open
+          Babel, Relational Database and extension programing.</para>
+        </listitem>
+
+        <listitem>
+          <para>Chris Morley - Open Babel lead developer</para>
+
+          <para>For comments and help on OpenBabel-Discuss mailing
+          list.</para>
+        </listitem>
+
+        <listitem>
+          <para>Noel O'Boyle - Open Babel developer</para>
+
+          <para>For comments and help on OpenBabel-Discuss mailing
+          list.</para>
+        </listitem>
+
+        <listitem>
+          <para>Fredrik Wallner</para>
+
+          <para>For debugging and tests on Mac OS X.</para>
+        </listitem>
+      </itemizedlist>
+    </sect2>
+  </sect1>
+
+  <sect1 id="copyright">
+    <title>Copyright</title>
+
+    <para>Mychem is Copyright © 2009-2012 CNRS</para>
+  </sect1>
+
+  <sect1 id="license">
+    <title>License</title>
+
+    <para><literallayout>Mychem is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</literallayout></para>
+
+    <para><literallayout>This software is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.</literallayout></para>
+
+    <para><literallayout>You should have received a copy of the GNU General Public License
+along with the software; if not, write to the
+Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+or see <ulink url="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</ulink>.</literallayout></para>
+  </sect1>
+</chapter>

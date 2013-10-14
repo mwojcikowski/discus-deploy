@@ -1,0 +1,17 @@
+=============================== OPTIMISATION ================================
+v1.0 Add support for build type (Debug, Release, ...)
+
+=================================== TESTS ====================================
+v1.0 Add tests with a greater amount of molecules
+
+================================= FUNCTIONS ==================================
+v0.9.2 Check pgchem interface
+v0.9.2 Add a switch for the addhydrogen interface
+v0.9.2 Add a switch for stereochemistry search in molmatch module
+v0.9.3 Enhance search performance(molmatch functions, tanimoto scoring)
+
+=============================== DOCUMENTATION ================================
+v0.9.2 Add a more explicit documentation with the -DOPENBABEL2_LIBRARIES=/path/to/library .. option
+v0.9.2 Synchronize bug reports with the troubleshooting section
+
+=================================== MISC ====================================

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.4//EN"
+                      "/usr/share/xml/docbook/schema/dtd/4.4/docbookx.dtd"
+[
+<!ENTITY introduction SYSTEM "introduction.xml">
+<!ENTITY usingMychem SYSTEM "using-mychem.xml">
+<!ENTITY commandReference SYSTEM "command-reference.xml">
+<!ENTITY credits SYSTEM "credits.xml">
+<!ENTITY installation SYSTEM "installation.xml">
+<!ENTITY troubleshooting SYSTEM "troubleshooting.xml">
+<!ENTITY sdfscript SYSTEM "sdfscript.xml">
+<!ENTITY db-manager SYSTEM "db-manager.xml">
+<!ENTITY molecule.formats SYSTEM "molecule-formats.xml">
+]>
+<!-- "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd" -->
+<book id="mychem" lang="en">
+
+<bookinfo>
+
+  <title>The Mychem Handbook</title>
+
+  <authorgroup>
+    <author>
+      <firstname>Jérôme</firstname>
+      <surname>PANSANEL</surname>
+      <email>jerome.pansanel@iphc.cnrs.fr</email>
+    </author>
+  </authorgroup>
+
+  <copyright>
+    <year>2009-2012</year>
+    <holder>CNRS</holder>
+  </copyright>
+
+  <date>13 Feb 2012</date>
+  <releaseinfo>0.9.1</releaseinfo>
+
+  <abstract>
+    <para>
+The Mychem Handbook is a documentation for the
+Mychem software. The Mychem software provides a set
+of functions for handling chemical data within MySQL.
+Mychem v0.9.1 is based on Open Babel version 2.3.0 (or any
+later version).
+    </para>
+  </abstract>
+
+  <keywordset>
+    <keyword>MySQL</keyword>
+    <keyword>Chemistry</keyword>
+    <keyword>Chemical database</keyword>
+    <keyword>Chemical structure</keyword>
+    <keyword>Structure search</keyword>
+  </keywordset>
+
+  <legalnotice>
+    <para>
+Redistribution and use in source (XML DocBook) and 'compiled' forms (SGML,
+HTML, PDF, PostScript, RTF and so forth) with or without modification, are
+permitted provided that the following conditions are met:
+    </para>
+
+    <orderedlist>
+
+      <listitem>
+        <para>
+Redistributions of source code (SGML DocBook) must retain the above copyright
+notice, this list of conditions and the following disclaimer as the first lines
+of this file unmodified.
+        </para>
+      </listitem>
+
+      <listitem>
+        <para>
+Redistributions in compiled form (transformed to other DTDs, converted to PDF,
+PostScript, RTF and other formats) must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution.
+        </para>
+      </listitem>
+
+    </orderedlist>
+
+    <para>
+This documentation is provided "as is" and any express or implied warranties,
+including, but not limited to, the implied warranties of merchantability and
+fitness for a particular purpose are disclaimed. In no event shall the Mychem
+documentation be liable for any direct, indirect, incidental, special,
+exemplary, or consequential damages (including, but not limited to, procurement
+of substitute goods or services; loss of use, data, or profits; or business
+interruption) however caused and on any theory of liability, whether in
+contract, strict liability, or tort (including negligence or otherwise) arising
+in any way out of the use of this documentation, even if advised of the
+possibility of such damage.
+    </para>
+  </legalnotice>
+
+</bookinfo>
+
+<toc>
+  <title>Contents</title>
+</toc>
+
+&introduction;
+&usingMychem;
+&commandReference;
+&credits;
+&installation;
+&troubleshooting;
+&sdfscript;
+&db-manager;
+&molecule.formats;
+
+</book>

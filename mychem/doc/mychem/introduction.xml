@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.3//EN"
+"/usr/share/xml/docbook/schema/dtd/4.3/docbookx.dtd">
+-->
+<chapter id="introduction">
+  <title>Introduction</title>
+
+  <sect1 id="Mychem-introduction">
+    <title>Mychem</title>
+
+    <para>Mychem is a chemoinformatics extension for MySQL. This extension
+    provides a set of functions that handles chemical data within the MySQL
+    database. Mychem is based on Open Babel (version &gt;= 2.2.0). As Open
+    Babel is a well-known software in chemoinformatics, Mychem proposes
+    reliable and fast functions. These functions permit you to search, analyze
+    and convert chemical data. More informations about Mychem are available on
+    the <ulink url="http://mychem.sourceforge.net/">Mychem
+    website</ulink>.</para>
+  </sect1>
+
+  <sect1 id="MySQL-introduction">
+    <title>MySQL</title>
+
+    <para>MySQL is one of the most popular Open Source SQL database servers.
+    It is a very fast, multi-threaded multi-user and robust application. MySQL
+    Server is intended for mission-critical, heavy-load production systems as
+    well as for embedding into mass-deployed software. Further informations
+    about MySQL can be founded on the <ulink url="http://www.mysql.com">MySQL
+    website</ulink>.</para>
+  </sect1>
+
+  <sect1 id="OpenBabel-Introduction">
+    <title>Open Babel</title>
+
+    <para>Open Babel is a chemical toolbox designed to speak the many
+    languages of chemical data. It is an open, collaborative project allowing
+    anyone to search, convert, analyze, or store data from molecular modeling,
+    chemistry, solid-state materials, biochemistry, or related areas. You can
+    find more informations about Open Babel on the <ulink
+    url="http://openbabel.sourceforge.net/wiki/Main_Page"> Open Babel
+    website</ulink>.</para>
+  </sect1>
+</chapter>

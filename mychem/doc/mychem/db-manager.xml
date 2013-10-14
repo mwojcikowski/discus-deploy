@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.3//EN"
+"/usr/share/xml/docbook/schema/dtd/4.3/docbookx.dtd">
+-->
+<appendix id="db-manager">
+  <title>Chemical Database Manager</title>
+
+  <para>This chapter presents a chemical database manager for handling
+  chemical databases with MySQL and Mychem.</para>
+
+  <sect1 id="db.manager.introduction">
+    <title>Introduction</title>
+
+    <para>The Mychem software is useful when working with chemical databases.
+    In order to facilitate the creation and the management of such databases,
+    <filename>mychemdb-manager.py</filename>, a Python program, has been added
+    to this project. This script is a command line interface that permits to
+    create or update chemical databases. A graphical version of this program
+    will be provided by the <ulink
+    url="http://chemdb.sourceforge.net/wiki/index.php/Main_Page">ChemiSQL
+    project</ulink> in a near future. The graphical interface will be
+    implemented in Java and will support another chemical cartridge projects,
+    like <ulink url="http://orchem.sourceforge.net">OrChem</ulink> or <ulink
+    url="http://pgfoundry.org/projects/pgchem/">pgchem::tigress</ulink>.</para>
+  </sect1>
+
+  <sect1 id="mychemdb.manager">
+    <title>mychemdb-manager.py</title>
+
+    <para>The <filename>mychemdb-manager.py</filename> script can be found in
+    the <filename role="directory">scripts</filename> directory. It is a
+    Python program released under the new BSD license. It requires the MySQLdb
+    module. This module can be retrieved from the <ulink
+    url="http://mysql-python.sourceforge.net/">Mysql-Python Project Web
+    Page</ulink>.</para>
+
+    <para>The usage of the script is simple. A help can be displayed by using
+    the <option>-h</option> option:</para>
+
+    <screen><prompt># </prompt><userinput>python mychemdb_manager.py -h</userinput>
+Usage: mychemdb_manager.py [options] FILE
+
+mychemdb_manager.py load a file in MDL SDF format into a MySQL database and
+creates a chemical cartridge with Mychem.
+
+Options:
+  --version       show program's version number and exit
+  -h, --help      show this help message and exit
+  -H HOST         connect to host [default: localhost]
+  -U USER         user for login to MySQL [default: mychem]
+  -P              use a password to connect to MySQL (it will be asked from
+                  the tty)
+  -D DB           database to use [default: mychem]
+  -n NAMETAG      name tag to use in the MDL SDF file
+  -l LOGFILE      log file name
+  -t TABLEPREFIX  table prefix
+  -a              append data if the compound table exists
+  -r              replace data if the compound table exists
+  -u              update data if the compound table exists
+  -v              verbose mode
+</screen>
+
+    <para>The first step is to create a database for storing the chemical
+    tables. By default, the script will use <emphasis>mychem</emphasis>, but
+    an other database name can be selected by using the <option>-D</option>
+    option.</para>
+
+    <programlisting>--
+-- Database creation
+--
+
+CREATE DATABASE `mychem`;
+</programlisting>
+
+    <para>Once the database is created, it is possible to load the MDL SDF
+    file with the <filename>mychem-manager.py</filename> script:</para>
+
+    <screen><prompt># </prompt><userinput>python mychem-manager.py -D mychem -U user -P database.sdf</userinput>
+Enter MySQL password:
+The MDL SDFFile has been successfully loaded.
+</screen>
+
+    <para>The previous command will create the following tables:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>compounds</emphasis> - It contains the compound's name
+        and two timestamps (when the entry is created and when the entry is
+        updated).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis>1D_structures</emphasis> - It contains the 1D
+        representation of the compounds (SMILES and InChI code).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis>3D_structures</emphasis> - It contains the 3D
+        structure of the compounds in MDL Molfile format.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis>bin_structures</emphasis> - It contains the binary
+        representation (fp2 and obserialized object) of the compounds .</para>
+      </listitem>
+    </itemizedlist>
+
+    <note>
+      <para>It is possible to add a prefix to the name of the tables by using
+      the <option>-t</option> option.</para>
+    </note>
+
+    <para>If all these tables already exist, the script will ask about the
+    action to perform:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>append the new data to the existing tables</para>
+      </listitem>
+
+      <listitem>
+        <para>Cancel the load</para>
+      </listitem>
+
+      <listitem>
+        <para>Replace the existing tables</para>
+      </listitem>
+
+      <listitem>
+        <para>Update the existing tables with the new data</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>In case only one, two or three tables exist, the update option will
+    not be available. It it possible to avoid this prompt by using the
+    <option>-a</option> (append), <option>-r</option> (replace) or
+    <option>-u</option> (update) option when calling the program.</para>
+  </sect1>
+</appendix>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.3//EN"
+"/usr/share/xml/docbook/schema/dtd/4.3/docbookx.dtd">
+-->
+<appendix id="troubleshooting">
+  <title>Troubleshooting</title>
+
+  <para>When running Mychem, you may encounter certain errors that prevent the
+  Mychem software to run perfectly. The purpose of this chapter is to help you
+  to diagnose and correct some of these errors.</para>
+
+  <sect1 id="mysql_errors">
+    <title>MySQL-Related Errors</title>
+
+    <para>This section describes the errors encounter with MySQL when running
+    Mychem.</para>
+
+    <sect2 id="lost_connection">
+      <title>ERROR 2013 (HY000): Lost connection to MySQL server during
+      query</title>
+
+      <para>The following examples show an error messages you may encounter
+      when using the SMILES_TO_MOLECULE function.</para>
+
+      <programlisting><prompt>mysql&gt; </prompt>SELECT SMILES_TO_MOLECULE('CCOCC');
+ERROR 2013 (HY000): Lost connection to MySQL server during query
+</programlisting>
+
+      <para>This problem has been observed with version of Mychem earlier to
+      0.6.0. To avoid this error, set the thread_stack parameter of MySQL to
+      192K. The thread_stack parameter is defined in the MySQL server
+      configuration file.</para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="apparmor">
+    <title>AppArmor</title>
+
+    <para>AppArmor is a Linux Security Module implementation of name-based
+    access controls. AppArmor confines individual programs to a set of listed
+    files. The default configuration of AppArmor does not permit the use of
+    Mychem. In fact, MySQL is not allowed to access the Open Babel library. To
+    fix this problem, the following lines must be added to the
+    <filename>/etc/apparmor.d/usr.sbin.mysqld</filename> file:</para>
+
+    <programlisting>/usr/lib/openbabel/* m,
+/usr/lib/openbabel/2.2.3/* m,
+/usr/share/openbabel/* r,
+/usr/share/openbabel/2.2.3/* r,
+</programlisting>
+  </sect1>
+
+  <sect1 id="other_errors">
+    <title>Other Errors</title>
+
+    <para>If you encounter an error not listed here, please report it on our
+    <ulink
+    url="http://sourceforge.net/tracker/?group_id=195099&amp;atid=952081"> bug
+    tracking system</ulink>.</para>
+  </sect1>
+</appendix>

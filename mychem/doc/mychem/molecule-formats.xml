@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.3//EN"
+"/usr/share/xml/docbook/schema/dtd/4.3/docbookx.dtd">
+-->
+<appendix id="molecule-formats">
+  <title>Molecule Formats</title>
+
+  <para>The <emphasis>Molecule Formats</emphasis> appendix describes the file
+  formats supported by the Mychem software. Further informations about
+  chemical file formats are available on <ulink
+  url="http://en.wikipedia.org/wiki/Chemical_file_format">Wikipedia</ulink>.</para>
+
+  <sect1 id="serialized.obmol">
+    <title>Serialized OBMol</title>
+
+    <para>The serialized OBMol format is a bit string obtained by serializing
+    an OBMol object. This type of string stores most of the data contained in
+    a OBMol object, with exception to 2D and 3D coordinates. The binary
+    structure of this string is described on the <ulink
+    url="http://chemdb.sourceforge.net/wiki/index.php/Binary_storage_of_OBMol_objects_for_faster_operations">ChemiSQL
+    Website</ulink>.</para>
+  </sect1>
+
+  <sect1 id="cml">
+    <title>CML</title>
+
+    <para>The Chemical Markup Language (CML) is an open standard for
+    representing molecular structures, as well as many other types of chemical
+    data. It is based on the XML language and can be simply processed by any
+    XML parser. The <ulink url="http://sourceforge.net/projects/cml/">CML
+    Project Website</ulink>, hosts the XML Schema and source codes for parsing
+    and working with CML data.</para>
+  </sect1>
+
+  <sect1 id="fingerprints">
+    <title>Fingerprints</title>
+
+    <para>This section presents fingerprint types used by the Mychem software.
+    Further details about fingerprints are given in an <ulink
+    url="http://www.dalkescientific.com/writings/diary/archive/2008/06/26/fingerprint_background.html">article</ulink>
+    written by Andrew Dalke. In short, fingerprints are a bit string
+    representation of a molecule. Most of them can be classified in two
+    categories:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Structural fingerprint - This fingerprint type is based on
+        substructure features.</para>
+      </listitem>
+
+      <listitem>
+        <para>Hash fingerprints - This fingerprint type is a hash of the
+        representation of a molecule. It is used most often in similarity
+        searching, with the hypothesis that two similar compounds create
+        similar fingerprints, and that two similar fingerprints means the
+        compounds are similar.</para>
+      </listitem>
+    </itemizedlist>
+
+    <sect2 id="fingerprints.fp2">
+      <title>FP2</title>
+
+      <para>FP2 fingerprints index small molecule fragments based on linear
+      segments of up to 7 atoms in length. They are hash fingerprints. The
+      specification of the FP2 fingerprints is available on the <ulink
+      url="http://openbabel.org/wiki/FP2">Open Babel Website</ulink>.</para>
+    </sect2>
+
+    <sect2 id="fingerprints.fp3">
+      <title>FP3</title>
+
+      <para>FP3 fingerprints index small molecule fragments based on a list of
+      SMART patterns. They are hash fingerprints. The SMART patterns are
+      listed in the file named <filename>patterns.txt</filename>, that is
+      distributed with the Open Babel software. The specification of the FP3
+      fingerprints is available on the <ulink
+      url="http://openbabel.org/wiki/FP3">Open Babel Website</ulink>.</para>
+    </sect2>
+
+    <sect2 id="fingerprints.fp4">
+      <title>FP4</title>
+
+      <para>FP4 fingerprints index small molecule fragments based on a list of
+      SMART patterns. They are hash fingerprints. The SMART patterns are
+      listed in the file named <filename>SMARTS_InteLigand.txt</filename>,
+      that is distributed with the Open Babel software. The specification of
+      the FP4 fingerprints is available on the <ulink
+      url="http://openbabel.org/wiki/FP4">Open Babel Website</ulink>.</para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="inchi">
+    <title>InChI</title>
+
+    <para>The IUPAC International Chemical Identifier (InChI) is an identifier
+    for chemical substances that can be used in printed and electronic data
+    sources. It was developed under IUPAC Project 2000-025-1-800. Details of
+    the project are available from the <ulink
+    url="http://www.iupac.org/inchi">IUPAC Website</ulink>.</para>
+  </sect1>
+
+  <sect1 id="mol2">
+    <title>Sybyl Mol2</title>
+
+    <para>The Sybyl Mol2 format is a complete, portable representation of a
+    molecule. It is an ASCII file that contains structural data as well as
+    Sybyl related data (Sybyl is a chemoinformatics software released by
+    Tripos). The file format is described on the <ulink
+    url="http://www.tripos.com/data/support/mol2.pdf">Tripos
+    Website</ulink>.</para>
+  </sect1>
+
+  <sect1 id="molfile">
+    <title>MDL Molfile</title>
+
+    <para>A MDL Molfile is a file format created by MDL for holding data about
+    the atoms, bonds, connectivity and coordinates of a molecule. This file
+    format consists of some header information, the Connection Table (CT)
+    containing atom info, then bond connections and types, followed by
+    sections for more complex information. The format is described on the
+    <ulink url="http://www.mdli.com/downloads/public/ctfile/ctfile.jsp">MDLI
+    Website</ulink>. There is two versions of MDL Molfile:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>V2000</para>
+      </listitem>
+
+      <listitem>
+        <para>V3000</para>
+      </listitem>
+    </itemizedlist>
+
+    <sect2 id="molfile.v2000">
+      <title>V2000</title>
+
+      <para>It is the current standard. However, it presents a limitation, as
+      it support up to 999 atoms or bonds.</para>
+    </sect2>
+
+    <sect2 id="molfile.v3000">
+      <title>V3000</title>
+
+      <para>The V3000 format has been created to support more than 999 atoms
+      or bonds. It can be useful for describing proteins and polymers.</para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="pdb">
+    <title>PDB</title>
+
+    <para>The Protein Data Bank Format is commonly used for proteins and
+    biological macromolecules. It was originally designed as a
+    fixed-column-width format and thus officially has a built-in maximum
+    number of atoms; however, many tools can read files that exceed the limit.
+    Some PDB files contain an optional section describing atom connectivity as
+    well as position. Further informations about this format can be retrieved
+    from the <ulink url="http://www.wwpdb.org/docs.html">PDB
+    Website</ulink>.</para>
+  </sect1>
+
+  <sect1 id="smiles">
+    <title>SMILES</title>
+
+    <para>The Simplified Molecular Input Line Entry Specification (SMILES)
+    format is a linear text format which can describe the connectivity and
+    chirality of a molecule. It does not include 2D or 3D coordinates and
+    hydrogens atoms are not represented. The SMILES are described on the
+    <ulink url="http://www.daylight.com/smiles/">Daylight Website</ulink>.
+    However, a complete SMILES standard does not exist. Craig James is leading
+    a campaign to develop an Open Standard for SMILES. The discussion is
+    taking place under the umbrella of the <ulink
+    url="http://blueobelisk.sourceforge.net/wiki/Open_Standard_for_SMILES">Blue
+    Obelisk Group</ulink>.</para>
+
+    <sect2 id="smiles.canonical">
+      <title>Canonical SMILES</title>
+
+      <para>Canonical SMILES is a particular type of SMILES, that has a single
+      <emphasis>canonical</emphasis> form for any particular molecule,
+      regardless of atom order.</para>
+    </sect2>
+  </sect1>
+</appendix>

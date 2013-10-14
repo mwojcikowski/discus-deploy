@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.3//EN"
+"/usr/share/xml/docbook/schema/dtd/4.3/docbookx.dtd">
+-->
+<chapter id="using-mychem">
+  <title>Using Mychem</title>
+
+  <para>This chapter provides a short tutorial on the usage of Mychem. It will
+  present you a simple way to create a chemical database with Mychem and how
+  to use some functions. More details about each function used in this
+  tutorial are available in the <xref linkend="command-reference" />.</para>
+
+  <sect1 id="database">
+    <title>The Database</title>
+
+    <para>A chemical database is composed of one or several tables. The
+    following example use a set of four tables, however the use of one table
+    can be sufficient when working with small databases.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>compounds</emphasis> - a table containing an unique id
+        for each molecule and its name.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis>1D_structures</emphasis> - a table containing an
+        unique reference to the <emphasis>compounds</emphasis> table and
+        several types of 1D molecular descriptors (InChI code and
+        SMILES).</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis>3D_structures</emphasis> - a table containing an
+        unique reference to the <emphasis>compounds</emphasis> table and the
+        3D structure in MDL Molfile format.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis>bin_structures</emphasis> - a table containing an
+        unique reference to the <emphasis>compounds</emphasis> table and
+        several types of binary descriptors (fingerprints and serialized OBMol
+        object).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>This section describes two ways to create and fill these tables. It
+    can be done manually by using SQL and Python scripts, or by using the
+    <filename>mychemdb-manager.py</filename> program provided with
+    Mychem.</para>
+
+    <sect2 id="script_database_creation">
+      <title>Database Creation with SQL and Python Scripts</title>
+
+      <sect3>
+        <title>Table Set Creation</title>
+
+        <para>The structure of the database can be created with the following
+        SQL code:</para>
+
+        <programlisting>--
+-- The 'mychem' database name is provided as example. You can
+-- choose any other existing database.
+--
+
+CREATE DATABASE `mychem`;
+USE mychem;
+
+
+--
+-- The `compounds` table is used to store an unique id for each
+-- compound and its name.
+--
+
+CREATE TABLE IF NOT EXISTS `compounds` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARSET utf8 COLLATE utf8_bin NOT NULL,
+  `created` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY id (`id`),
+  KEY name (`name`) )
+  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+  COMMENT='Compound Library';
+
+
+--
+-- The `1D_structures` table is used to store InChI codes and SMILES
+-- strings. This table can be used for exact or substructure match
+-- queries.
+--
+
+CREATE TABLE IF NOT EXISTS `1D_structures` (
+  `compound_id` int(11) unsigned NOT NULL,
+  `inchi` text NOT NULL,
+  `smiles` text NOT NULL,
+  PRIMARY KEY compound_id (`compound_id`) )
+  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+  COMMENT='Compound 1D Structures';
+
+
+--
+-- The `3D_structures` table is used to store MDL Molfiles.
+--
+
+CREATE TABLE IF NOT EXISTS `3D_structures` (
+  `compound_id` int(11) unsigned NOT NULL,
+  `molfile` text NOT NULL,
+  PRIMARY KEY compound_id (`compound_id`) )
+  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+  COMMENT='Compound 3D Structures';
+
+
+--
+-- The `bin_structures` table is used to store binary descriptors.
+-- This table can be used for similarity and substructure queries.
+--
+
+CREATE TABLE IF NOT EXISTS `bin_structures` (
+  `compound_id` int(11) unsigned NOT NULL,
+  `fp2` blob NULL,
+  `obserialized` blob NULL,
+  PRIMARY KEY compound_id (`compound_id`) )
+  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin
+  COMMENT='Compound Binary Structures';
+</programlisting>
+      </sect3>
+
+      <sect3 id="database_content">
+        <title>Inserting Data</title>
+
+        <para>The molecular structures contained in a MDL SDF file can be easily
+        loaded into the database by using a Python or a Perl script. Such a
+        script is listed in <xref linkend="sdfscript" />. Once the
+        <emphasis>compounds</emphasis> and <emphasis>3D_structures</emphasis>
+        tables are filled, you can populate the two remaining tables. To
+        insert data into the <emphasis>1D_structures</emphasis> and
+        <emphasis>bin_structures</emphasis> tables, use the following SQL
+        code:</para>
+
+        <programlisting>--
+-- Database: mychem
+--
+
+USE mychem;
+
+
+--
+-- Insertion of data into the `1D_structures` table
+--
+
+INSERT INTO `1D_structures` (`compound_id`,`inchi`,`smiles`)
+SELECT `compound_id`, MOLECULE_TO_INCHI(`molfile`),
+MOLECULE_TO_SMILES(`molfile`) FROM `3D_structures`;
+
+
+--
+-- Insertion of data into the `bin_structures` table
+--
+
+INSERT INTO `bin_structures` (`compound_id`,`fp2`,`obserialized`)
+SELECT `compound_id`, FINGERPRINT2(`molfile`),
+MOLECULE_TO_SERIALIZEDOBMOL(`molfile`) FROM `3D_structures`;
+</programlisting>
+
+        <para>The database is now fully usable. Additional tables can also be
+        created. For example, a table storing chemical properties (molecular
+        weight, LogP, ...) can be interesting.</para>
+      </sect3>
+    </sect2>
+
+    <sect2 id="mychemdb_manager_database_creation">
+      <title>Database creation with <filename>mychemdb-manager.py</filename></title>
+
+      <para>All tasks described in the previous section can also be performed
+      with the <filename>mychemdb-manager.py</filename> script, a Python
+      program provided with Mychem. It can be found in the <filename
+      class="directory">scripts</filename> directory. This program aims to
+      provide a convenient interface for loading and managing chemical
+      databases in MySQL. A complete overview of this script is detailed in
+      <xref linkend="db-manager" />.</para>
+    </sect2>
+  </sect1>
+
+  <sect1 id="examples">
+    <title>Examples</title>
+
+    <para>Once the database is created, you can use many chemical functions.
+    Here is a (very) short overview of the possibilities. The dataset used for
+    this example can be freely obtained from the <ulink
+    url="http://chemfiles.sourceforge.net">Chemical Structures
+    Project</ulink>.</para>
+
+    <sect2 id="calculate.molweight">
+      <title>Calculate the Molecular Weight</title>
+
+      <para>The computation of the molecular weight of a molecule is performed
+      by the <xref linkend="MOLWEIGHT" xrefstyle="select: nopage" /> function.
+      In the following example, the molecular weight of the amino acid
+      <emphasis>glycine</emphasis> is calculated.</para>
+
+      <programlisting><prompt>mysql&gt; </prompt><userinput>SELECT MOLWEIGHT(`3D_structures`.`molfile`)</userinput>
+<prompt>    -&gt; </prompt><userinput>FROM `compounds`,`3D_structures`</userinput>
+<prompt>    -&gt; </prompt><userinput>WHERE `compounds`.`name`='glycine'</userinput>
+<prompt>    -&gt; </prompt><userinput>AND `compounds`.`id`=`3D_structures`.`compound_id`;</userinput>
+        -&gt; 75.066600
+</programlisting>
+    </sect2>
+
+    <sect2 id="search.substructure">
+      <title>Search a Substructure</title>
+
+      <para>The <xref linkend="MATCH_SUBSTRUCT" xrefstyle="select: nopage" />
+      function permits to find a substructure. In this example, we are looking
+      for compounds containing a phenol group:</para>
+
+      <programlisting><prompt>mysql&gt; </prompt><userinput>SELECT `compounds`.`name` </userinput>
+<prompt>    -&gt; </prompt><userinput>FROM `compounds`,`bin_structures`</userinput>
+<prompt>    -&gt; </prompt><userinput>WHERE `compounds`.`id`=`bin_structures`.`compound_id`</userinput>
+<prompt>    -&gt; </prompt><userinput>AND MATCH_SUBSTRUCT('[OH]c1ccccc1',`obserialized`);</userinput>
+<prompt>    -&gt; </prompt><userinput>LIMIT 10;</userinput>
++-----------------------------+
+| name                        |
++-----------------------------+
+| 2,3,4,5,6-Pentachlorophenol |
+| 2,3-Dimethylphenol          |
+| 2,4,6-Trichlorophenol       |
+| 2,4-Dimethylphenol          |
+| 2,5-Dimethylphenol          |
+| 2,6-Dimethylphenol          |
+| 2-Bromophenol               |
+| 2-Chloro-5-methylphenol     |
+| 2-Chlorophenol              |
+| 2-Hydroxybenzaldehyde       |
++-----------------------------+
+10 rows in set (0.02 sec)
+</programlisting>
+    </sect2>
+  </sect1>
+</chapter>
