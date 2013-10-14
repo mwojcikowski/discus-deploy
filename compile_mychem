@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# find how many CPUs are available
+cpu=`cat /proc/cpuinfo | grep -c "processor"`
+
+# clear build path and cd to it
+rm -rf mychem-build
+mkdir mychem-build
+cd mychem-build
+
+cmake ../mychem 
+
+make -j ${cpu}
+make test
