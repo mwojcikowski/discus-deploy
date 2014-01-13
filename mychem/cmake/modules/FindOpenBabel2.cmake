@@ -40,6 +40,7 @@ endif(NOT WIN32)
     ${_obIncDir}
     /usr/local/include
     /usr/include
+    /usr/local/include/openbabel-2.0
     ${GNUWIN32_DIR}/include
     $ENV{OPENBABEL2_INCLUDE_DIR}
   )
