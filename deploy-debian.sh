@@ -18,7 +18,7 @@ ldconfig
 mysql -u root -p < mychem/src/mychemdb.sql
 echo "CREATE USER 'discus'@'localhost' IDENTIFIED BY 'discusvm'; GRANT ALL PRIVILEGES ON *.* TO 'discus'@'localhost'; FLUSH PRIVILEGES;" | mysql -u root -p
 
-echo "extension = openbabel-php.so" > /etc/php5/conf.d/21-disus.ini
+ln -s ~/discus-deploy/disucs-php.ini /etc/php5/apache2/conf.d/99-disus-php.ini
 service apache2 restart
 
 # Note: DiSCuS is installed in root www directory
