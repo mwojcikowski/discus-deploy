@@ -1,10 +1,10 @@
 # deploy scrip tested on Debian Wheezy 7.5
 
-apt-get install php5 php5-dev php5-xcache apache2 phpmyadmin mysql-server libmysqld-dev libmysqlclient-dev git swig cmake
+apt-get -y install php5 php5-dev php5-xcache apache2 phpmyadmin mysql-server libmysqld-dev libmysqlclient-dev git swig cmake
 apt-get -y install avahi-daemon libnss-mdns
 apt-get -y build-dep openbabel
-apt-get remove libeigen2-dev
-apt-get install libeigen3-dev
+apt-get -y remove libeigen2-dev
+apt-get -y install libeigen3-dev
 
 cd ~
 git clone --recursive https://github.com/mwojcikowski/discus-deploy.git discus-deploy
