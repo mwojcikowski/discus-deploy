@@ -13,6 +13,8 @@ cd discus-deploy
 cd openbabel-build && make install && cd ..
 ./compile_mychem
 cd mychem-build && make install && cd ..
+
+ldconfig
 mysql -u root -p < mychem/src/mychemdb.sql
 # TODO create user and grant privilages
 
