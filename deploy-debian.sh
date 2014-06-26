@@ -16,7 +16,7 @@ cd mychem-build && make install && cd ..
 
 ldconfig
 mysql -u root -p < mychem/src/mychemdb.sql
-# TODO create user and grant privilages
+echo "CREATE USER 'discus'@'localhost' IDENTIFIED BY 'discusvm'; GRANT ALL PRIVILEGES ON *.* TO 'discus'@'localhost'; FLUSH PRIVILEGES;" | mysql -u root -p
 
 echo "extension = openbabel-php.so" > /etc/php5/conf.d/21-disus.ini
 service apache2 restart
