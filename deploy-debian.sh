@@ -1,4 +1,4 @@
-# deploy scrip tested on Debian Wheezy 7.5
+# deploy script tested on Debian Wheezy 7.8
 
 apt-get -y install php5 php5-dev php5-xcache apache2 phpmyadmin mysql-server libmysqld-dev libmysqlclient-dev git swig cmake
 apt-get -y install avahi-daemon libnss-mdns
