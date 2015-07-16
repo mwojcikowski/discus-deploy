@@ -11,8 +11,6 @@ cd openbabel-build
 cmake ../openbabel \
 -DRUN_SWIG=ON \
 -DPHP_BINDINGS=ON \
--DPYTHON_BINDINGS=ON \
 -DCMAKE_BUILD_TYPE=RELEASE
 
 make -j ${cpu}
-make test

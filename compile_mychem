@@ -11,4 +11,3 @@ cd mychem-build
 cmake ../mychem 
 
 make -j ${cpu}
-make test
